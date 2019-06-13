@@ -1,14 +1,10 @@
 use std::{thread, time};
 
-
 fn main() {
-
     let time = time::Duration::from_secs(1);
 
     loop {
-        println!("Hello, {} !", get_world_name());
-        thread::sleep(time);
-        println!("good by, {} !", get_world_name());
+        println!("Hello, World ! I'm lignée server !");
         thread::sleep(time);
     }
 }

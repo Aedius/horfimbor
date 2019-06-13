@@ -4,8 +4,8 @@ build:
   tagPolicy:
     sha256: {}
   artifacts:
-  - image: hello
+  - image: lignee-server
 deploy:
   kubectl:
     manifests:
-    - pod.yml
+    - k8s/pod.yml
