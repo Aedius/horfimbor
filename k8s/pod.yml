@@ -7,3 +7,6 @@ spec:
     - name: hello
       image: lignee-server
       imagePullPolicy: IfNotPresent
+      ports:
+        - name: web
+          containerPort: 3000
