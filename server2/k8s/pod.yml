@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lignee-server-2
+spec:
+  containers:
+    - name: hello
+      image: lignee-server-2
+      imagePullPolicy: IfNotPresent
+      ports:
+        - name: web
+          containerPort: 2000

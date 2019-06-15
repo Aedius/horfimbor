@@ -1,0 +1,51 @@
+extern crate hyper;
+
+use hyper::{Body, Request, Response, Server};
+use hyper::rt::Future;
+use hyper::service::service_fn_ok;
+
+const PHRASE: &str = "Hello, World 2 !";
+
+fn hello_world(_req: Request<Body>) -> Response<Body> {
+    println!("call 2");
+    Response::new(Body::from(PHRASE))
+}
+
+
+fn main() {
+
+    println!("START 2 ok");
+
+    // This is our socket address...
+    let addr = ([127, 0, 0, 1], 2000).into();
+
+// A `Service` is needed for every connection, so this
+// creates one from our `hello_world` function.
+    let new_svc = || {
+        // service_fn_ok converts our function into a `Service`
+        service_fn_ok(hello_world)
+    };
+
+    let server = Server::bind(&addr)
+        .serve(new_svc)
+        .map_err(|e| eprintln!("server error: {}", e));
+
+// Run this server for... forever!
+    hyper::rt::run(server);
+
+}
+
+pub fn get_world_name() -> &'static str {
+    "World"
+}
+
+#[cfg(test)]
+mod tests {
+    // Note this useful idiom: importing names from outer (for mod tests) scope.
+    use super::*;
+
+    #[test]
+    fn test_get_world_name() {
+        assert_eq!(get_world_name(), "World");
+    }
+}

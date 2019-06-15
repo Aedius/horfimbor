@@ -5,7 +5,15 @@ build:
     sha256: {}
   artifacts:
   - image: lignee-server
+    context: server
+    docker:
+      dockerfile: Dockerfile
+  - image: lignee-server-2
+    context: server2
+    docker:
+      dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
-    - k8s/pod.yml
+    - server/k8s/pod.yml
+    - server2/k8s/pod.yml
