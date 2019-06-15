@@ -3,13 +3,13 @@ rust:
   - stable
   - beta
   - nightly
+env:
+  PROJECT=server
+  PROJECT=server2
 matrix:
   allow_failures:
     - rust: nightly
   fast_finish: true
-  include:
-    - env: PROJECT=server
-    - env: PROJECT=server2
 cache: cargo
 script:
   - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PROJECT; then echo "$PROJECT is being built" && cargo build --verbose --all ; else echo "$PROJECT is NOT being built"; fi
