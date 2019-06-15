@@ -4,8 +4,8 @@ rust:
   - beta
   - nightly
 env:
-  PROJECT=server
-  PROJECT=server2
+  - PROJECT=server
+  - PROJECT=server2
 matrix:
   allow_failures:
     - rust: nightly
