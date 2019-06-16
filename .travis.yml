@@ -3,14 +3,20 @@ rust:
   - stable
   - beta
   - nightly
+
+before_install:
+  - rustup target add wasm32-unknown-unknown
+
 env:
   - PROJECT=server
   - PROJECT=server2
-  - PROJECT=client-web
+  - PROJECT=client-web IS_WASM=true
+
 matrix:
   allow_failures:
     - rust: nightly
   fast_finish: true
+
 cache: cargo
 script:
   - .travis/build.sh
