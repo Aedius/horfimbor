@@ -13,4 +13,3 @@ matrix:
 cache: cargo
 script:
   - .travis/build.sh
-  - .travis/test.sh
