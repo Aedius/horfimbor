@@ -19,7 +19,7 @@ if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PROJECT; then
 
     if [[ "$IS_WASM" = true ]] ; then
         echo "cargo test --target wasm32-unknown-unknown --verbose --all"
-        cargo test --target wasm32-unknown-unknown --verbose --all
+        cargo test --target wasm32-unknown-unknown --verbose --all --lib
     else
         echo "cargo test --verbose --all"
         cargo test --verbose --all
