@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lignee-client-web
+spec:
+  containers:
+    - name: hello
+      image: lignee-client-web
+      imagePullPolicy: IfNotPresent
+      ports:
+        - name: web
+          containerPort: 80

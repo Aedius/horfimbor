@@ -1,0 +1,15 @@
+[package]
+name = "client-web"
+version = "0.1.0"
+authors = ["Aedius <aedius.filmania@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = 'z'
+lto = true
+panic = 'abort'

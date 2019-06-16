@@ -6,6 +6,7 @@ rust:
 env:
   - PROJECT=server
   - PROJECT=server2
+  - PROJECT=client-web
 matrix:
   allow_failures:
     - rust: nightly

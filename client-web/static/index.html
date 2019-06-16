@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lignee</title>
+    <script>
+        fetchAndInstantiate('js/client_web.wasm').then(function(instance) {
+           console.log(instance.exports.add(17, 25));
+        });
+        // fetchAndInstantiate() found in wasm-utils.js
+        function fetchAndInstantiate(url, importObject) {
+          return fetch(url).then(response =>
+            response.arrayBuffer()
+          ).then(bytes =>
+            WebAssembly.instantiate(bytes, importObject)
+          ).then(results =>
+            results.instance
+          );
+        }
+        </script>
+</head>
+<body>
+
+Hello world
+
+</body>

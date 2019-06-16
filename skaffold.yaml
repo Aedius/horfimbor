@@ -12,8 +12,13 @@ build:
     context: server2
     docker:
       dockerfile: Dockerfile
+  - image: lignee-client-web
+    context: client-web
+    docker:
+      dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
     - server/k8s/pod.yml
     - server2/k8s/pod.yml
+    - client-web/k8s/pod.yml
