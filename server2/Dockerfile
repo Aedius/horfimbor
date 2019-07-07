@@ -3,13 +3,15 @@ FROM rust:latest as build
 
 # create a new empty shell project
 RUN USER=root cargo new --bin lignee2
-WORKDIR /lignee2
+WORKDIR /lignee
 
 # copy over your manifests
 COPY Cargo.lock ./Cargo.lock
 COPY Cargo.toml ./Cargo.toml
 
 # this build step will cache your dependencies
+RUN mkdir src
+RUN echo 'fn main() { println!("dont see this"); }' > src/main.rs
 RUN cargo build --release
 RUN rm src/*.rs
 
@@ -24,7 +26,8 @@ RUN cargo build --release
 FROM gcr.io/distroless/cc
 
 # copy the build artifact from the build stage
-COPY --from=build /lignee2/target/release/lignee2 .
+COPY --from=build /lignee/target/release/lignee2 .
 
 # set the startup command to run your binary
 CMD ["./lignee2"]
+t

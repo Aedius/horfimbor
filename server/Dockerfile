@@ -10,6 +10,8 @@ COPY Cargo.lock ./Cargo.lock
 COPY Cargo.toml ./Cargo.toml
 
 # this build step will cache your dependencies
+RUN mkdir src
+RUN echo 'fn main() { println!("dont see this"); }' > src/main.rs
 RUN cargo build --release
 RUN rm src/*.rs
 

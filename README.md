@@ -20,3 +20,12 @@ and then launch :
 - add this config to skaffold.yaml
 - add the folder in .travis.yml
 - add the folder in dependabot
+
+
+## extract Cargo.lock
+
+in each sub project :
+
+`docker build --target=build --tag=tmp . `
+ 
+`docker run --rm --entrypoint cat tmp:latest  /lignee/Cargo.lock > Cargo.lock`
