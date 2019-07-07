@@ -1,8 +1,16 @@
 extern crate hyper;
 
+
+pub mod command;
+pub mod domain;
+pub mod error;
+pub mod aggregate;
+pub mod event;
+
 use hyper::{Body, Request, Response, Server};
 use hyper::rt::Future;
 use hyper::service::service_fn_ok;
+
 
 const PHRASE: &str = "Hello, World!";
 
