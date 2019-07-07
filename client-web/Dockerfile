@@ -4,7 +4,7 @@ FROM rust:latest as build
 RUN rustup target add wasm32-unknown-unknown
 
 # create a new empty shell project
-RUN USER=root cargo new --bin client-web
+RUN USER=root cargo new --bin lignee
 WORKDIR /lignee
 
 # copy over your manifests
@@ -13,7 +13,7 @@ COPY Cargo.toml ./Cargo.toml
 
 
 # this build step will cache your dependencies
-RUN mkdir src
+
 RUN echo 'fn main() { println!("dont see this"); }' > src/main.rs
 RUN cargo build --target wasm32-unknown-unknown --release
 RUN rm src/*.rs
