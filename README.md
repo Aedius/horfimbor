@@ -1,10 +1,24 @@
-[![Build Status](https://travis-ci.org/Aedius/lignee.svg?branch=master)](https://travis-ci.org/Aedius/lignee)
+[![Build Status](https://travis-ci.org/Aedius/horfimbor.svg?branch=master)](https://travis-ci.org/Aedius/horfimbor)
 
 # horfimbor
 
 This project is licensed under the terms of the MIT license.
 
 ## initialize
+
+### kafka
+
+with a kubernetes server and helm installed :
+
+    helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
+    skaffold run -f.skaffold/kafka.yaml
+
+to removed :
+
+	skaffold delete -f.skaffold/kafka.yaml
+
+
+### rust
 
 For dev environnment
 
@@ -30,4 +44,4 @@ in each sub project :
 
 `docker build --target=build --tag=tmp . `
  
-`docker run --rm --entrypoint cat tmp:latest  /lignee/Cargo.lock > Cargo.lock`
+`docker run --rm --entrypoint cat tmp:latest  /horfimbor/Cargo.lock > Cargo.lock`

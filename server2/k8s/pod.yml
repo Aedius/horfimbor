@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: lignee-server-2
+  name: horfimbor-server-2
 spec:
   containers:
     - name: hello
-      image: lignee-server-2
+      image: localhost:32000/horfimbor-server-2
       imagePullPolicy: IfNotPresent
       ports:
         - name: web

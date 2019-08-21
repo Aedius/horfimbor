@@ -1,0 +1,44 @@
+apiVersion: skaffold/v1beta13
+kind: Config
+build:
+  local:
+    push: true
+    useDockerCLI: true
+  insecureRegistries:
+    - localhost:32000
+  tagPolicy:
+    sha256: {}
+  artifacts:
+  - image: localhost:32000/horfimbor-server
+    context: server
+    custom:
+      buildCommand: ./build.sh
+      dependencies:
+        paths:
+          - .
+        ignore:
+          - target
+  - image: localhost:32000/horfimbor-server-2
+    context: server2
+    custom:
+      buildCommand: ./build.sh
+      dependencies:
+        paths:
+          - .
+        ignore:
+          - target
+  - image: localhost:32000/horfimbor-client-web
+    context: client-web
+    custom:
+      buildCommand: ./build.sh
+      dependencies:
+        paths:
+          - .
+        ignore:
+          - target
+deploy:
+  kubectl:
+    manifests:
+    - server/k8s/pod.yml
+    - server2/k8s/pod.yml
+    - client-web/k8s/pod.yml

@@ -14,7 +14,7 @@ impl error::Error for InvalidResources {
 
 impl fmt::Display for InvalidResources {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let err: &error::Error = self;
+        let err: &dyn error::Error = self;
         f.write_str(err.description())
     }
 }
