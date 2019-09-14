@@ -1,0 +1,47 @@
+replicaCount: 1
+
+exporters:
+  jmx:
+    enabled: true
+    image:
+      repository: sscaling/jmx-prometheus-exporter
+      tag: 0.12.0
+      pullPolicy: IfNotPresent
+    config:
+      lowercaseOutputName: false
+      ## ref: https://github.com/prometheus/jmx_exporter/blob/master/example_configs/zookeeper.yaml
+      rules:
+        # - pattern: "org.apache.ZooKeeperService<name0=ReplicatedServer_id(\\d+)><>(\\w+)"
+        #   name: "zookeeper_$2"
+        # - pattern: "org.apache.ZooKeeperService<name0=ReplicatedServer_id(\\d+), name1=replica.(\\d+)><>(\\w+)"
+        #   name: "zookeeper_$3"
+        #   labels:
+        #     replicaId: "$2"
+        # - pattern: "org.apache.ZooKeeperService<name0=ReplicatedServer_id(\\d+), name1=replica.(\\d+), name2=(\\w+)><>(\\w+)"
+        #   name: "zookeeper_$4"
+        #   labels:
+        #     replicaId: "$2"
+        #     memberType: "$3"
+        # - pattern: "org.apache.ZooKeeperService<name0=ReplicatedServer_id(\\d+), name1=replica.(\\d+), name2=(\\w+), name3=(\\w+)><>(\\w+)"
+        #   name: "zookeeper_$4_$5"
+        #   labels:
+        #     replicaId: "$2"
+        #     memberType: "$3"
+        - pattern: "org.apache.ZooKeeperService<name0=StandaloneServer_port(\\d+)><>(\\w+)"
+          name: "zookeeper_$2"
+        - pattern: "org.apache.ZooKeeperService<name0=StandaloneServer_port(\\d+), name1=InMemoryDataTree><>(\\w+)"
+          name: "zookeeper_$2"
+      startDelaySeconds: 30
+    serviceMonitor:
+      interval: 30s
+      scrapeTimeout: 30s
+      scheme: http
+  zookeeper:
+    enabled: true
+    serviceMonitor:
+      interval: 30s
+      scrapeTimeout: 30s
+      scheme: http
+
+env:
+  ZK_HEAP_SIZE: 128M

@@ -21,18 +21,20 @@ This project is licensed under the terms of the MIT license.
 	# to get the token :
 	token=$(microk8s.kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)
 	microk8s.kubectl -n kube-system describe secret $token
+	
+	# to copy the config into a file
+	microk8s.kubectl config view --raw > $HOME/.kube/config 
+	# to connect from an other server, use this file, replacing 127.0.0.1 by your ip
 
-### kafka
+### kafka ( with zookeeper )
 
 with a kubernetes server and helm installed :
 
     helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
-    skaffold run -f.skaffold/kafka.yaml
-
-to removed :
-
-	skaffold delete -f.skaffold/kafka.yaml
-
+    helm repo update
+    kubectl apply -f ./.helm/namespace.yml
+    helm upgrade --wait --install zookeeper --namespace infra incubator/zookeeper --values ./.helm/zookeeper/values.yml
+    helm upgrade --wait --install kafka --namespace infra incubator/kafka --values ./.helm/kafka/values.yml
 
 ### rust
 
